@@ -1,4 +1,4 @@
-module pac
+module wasmpac
 
 go 1.21
 

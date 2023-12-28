@@ -3,7 +3,7 @@ package wasmpac
 import (
 	"context"
 	_ "embed"
-	"pac/pkg"
+	"wasmpac/pkg"
 )
 
 //go:embed pac.wasm

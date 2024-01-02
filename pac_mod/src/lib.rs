@@ -25,13 +25,13 @@ pub fn eval_pac(src: &str, url: &str, host: &str) -> String {
             to_js_resp(dns_resolve(host.to_std_string_escaped().as_str()))
         } else {
             Ok(NativeJsValue::null())
-        })).unwrap();
+        })).expect("cannot register dnsResolve");
     cb.register_global_builtin_callable(
         "myIpAddress", 0, NativeFunction::from_fn_ptr(|_, _, _| to_js_resp(my_ip_addr())),
-    ).unwrap();
+    ).expect("cannot register myIpAddress");
     match cb.eval(Source::from_bytes(format!("{}\n{}\nFindProxyForURL({:?},{:?})", BUILTIN_JS,
                                              src, url.trim(), host.trim()).as_str())) {
-        Ok(NativeJsValue::String(s)) => s.to_std_string_escaped(),
+        Ok(NativeJsValue::String(s)) => format!("..{}", s.to_std_string_escaped()),
         Ok(t) => format!("!!Wrong type: {}", t.display().to_string()),
         Err(e) => format!("!!Uncaught {e}"),
     }

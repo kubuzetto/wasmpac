@@ -1,26 +1,10 @@
-package pkg
+package wasmpac
 
 import (
-	"crypto/rand"
 	"errors"
-	"github.com/tetratelabs/wazero/sys"
 	"net"
 	"time"
 )
-
-// DefaultFuncs bundles all functionality implemented in the Go side.
-var DefaultFuncs = Funcs{
-	DNSResolver: DNSResolver,
-	MyIPAddr:    MyIPAddr,
-
-	// default implementations of these are taken from wazero
-	RandSource:         rand.Reader,
-	Nanosleep:          Nanosleep,
-	Nanotime:           Nanotime,
-	NanotimeResolution: 1,
-	Walltime:           Walltime,
-	WalltimeResolution: sys.ClockResolution(time.Microsecond.Nanoseconds()),
-}
 
 var nanoBase = time.Now()
 
